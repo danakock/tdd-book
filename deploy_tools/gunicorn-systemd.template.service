@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn server for superlists-staging.ravnurs.com
+
+[Service]
+Restart=on-failure
+User=elspeth
+WorkingDirectory=/home/dana/sites/superlists-staging.ravnurs.com
+EnvironmentFile=/home/dana/sites/superlists-staging.ravnurs.com/.env
+
+ExecStart=/home/dana/sites/superlists-staging.ravnurs.com/virtualenv/bin/gunicorn \
+    --bind unix:/tmp/superlists-staging.ravnurs.com.socket \
+    superlists.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
